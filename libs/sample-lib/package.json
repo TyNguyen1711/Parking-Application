@@ -7,9 +7,11 @@
   "type": "commonjs",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "tsc": "tsc --noEmit"
   },
   "devDependencies": {
+    "prettier": "^3.6.2",
     "typescript": "^5.9.2"
   }
 }
