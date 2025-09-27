@@ -1,6 +1,13 @@
 {
   "name": "parking-application",
   "version": "1.0.0",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "libs/*"
+    ]
+  },
   "description": "",
   "license": "ISC",
   "author": "",

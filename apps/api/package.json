@@ -1,5 +1,5 @@
 {
-  "name": "api",
+  "name": "@parking-application/api",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -48,8 +48,9 @@
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.7.3",
-    "typescript-eslint": "^8.20.0"
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.20.0",
+    "@parking-application/sample-lib": "*"
   },
   "jest": {
     "moduleFileExtensions": [
