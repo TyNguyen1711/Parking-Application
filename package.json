@@ -14,13 +14,13 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "format": "prettier \"{apps,libs}/**/*.{ts,tsx,js,json}\" --ignore-path .gitignore",
+    "format": "prettier  \"{apps,libs}/**/*.{ts,tsx,js,json}\" --ignore-path .gitignore",
     "format:check": "prettier \"{apps,libs}/**/*.{ts,tsx,js,json}\" --ignore-path .gitignore --check",
     "format:write": "prettier \"{apps,libs}/**/*.{ts,tsx,js,json}\" --ignore-path .gitignore --write",
     "tsc": "npm run tsc --workspaces",
     "lint": "npm run lint --workspaces",
     "build": "npm run build --workspaces",
-    "validate": "npm run format:check && npm run tsc && npm run build",
+    "validate": "npm run format:write && npm run tsc && npm run build",
     "prepare": "husky install"
   },
   "devDependencies": {
