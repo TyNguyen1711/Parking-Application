@@ -1,41 +1,51 @@
-import { Field, InputType, PartialType } from '@nestjs/graphql'
-import { Prisma } from 'generated/prisma'
-import { DateTimeFilter, RestrictProperties, StringFilter } from 'src/common/dtos/common.input'
+import { Field, InputType, PartialType } from '@nestjs/graphql';
+import { Prisma } from 'generated/prisma';
+import {
+  DateTimeFilter,
+  RestrictProperties,
+  StringFilter,
+} from 'src/common/dtos/common.input';
 
 @InputType()
 export class UserWhereUniqueInput {
-  uid: string
+  uid: string;
 }
 
 @InputType()
-export class UserWhereInputStrict implements RestrictProperties<UserWhereInputStrict,
- Omit<Prisma.UserWhereInput, 'Credentials' | 'AuthProvider' | 'Admin'>> {
+export class UserWhereInputStrict
+  implements
+    RestrictProperties<
+      UserWhereInputStrict,
+      Omit<
+        Prisma.UserWhereInput,
+        'Credentials' | 'AuthProvider' | 'Admin' | 'image'
+      >
+    >
+{
   // Todo: Add the below field decorator only to the $Enums types.
   // @Field(() => $Enums.x)
-  uid: StringFilter
-  createdAt: DateTimeFilter
-  updatedAt: DateTimeFilter
-  name: StringFilter
-
-  AND: UserWhereInput[]
-  OR: UserWhereInput[]
-  NOT: UserWhereInput[]
+  uid: StringFilter;
+  createdAt: DateTimeFilter;
+  updatedAt: DateTimeFilter;
+  name: StringFilter;
+  // image: StringFilter;
+  AND: UserWhereInput[];
+  OR: UserWhereInput[];
+  NOT: UserWhereInput[];
 }
 
 @InputType()
-export class UserWhereInput extends PartialType(
-  UserWhereInputStrict,
-) {}
+export class UserWhereInput extends PartialType(UserWhereInputStrict) {}
 
 @InputType()
 export class UserListRelationFilter {
-  every?: UserWhereInput
-  some?: UserWhereInput
-  none?: UserWhereInput
+  every?: UserWhereInput;
+  some?: UserWhereInput;
+  none?: UserWhereInput;
 }
 
 @InputType()
 export class UserRelationFilter {
-  is?: UserWhereInput
-  isNot?: UserWhereInput
+  is?: UserWhereInput;
+  isNot?: UserWhereInput;
 }
