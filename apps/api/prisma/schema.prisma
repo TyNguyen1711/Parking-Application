@@ -74,13 +74,13 @@ enum AuthProviderType {
 
 model Customer {
   uid       String   @id
-  user      User     @relation(fields: [uid], references: [uid])
+  User      User     @relation(fields: [uid], references: [uid])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  display  String?
-  Bookings Booking[]
-  Reviews  Review[]
+  displayName String?
+  Bookings    Booking[]
+  Reviews     Review[]
 }
 
 model Manager {

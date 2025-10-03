@@ -6,3 +6,31 @@ dist
 
 
 .nx/cache
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# npm run entity:complete Admin
+# npm run entity:complete Customer
+# npm run entity:complete Manager
+# npm run entity:complete Valet
+# npm run entity:complete Company
+# npm run entity:complete Garage
+# npm run entity:complete Address
+# npm run entity:complete Slot
+# npm run entity:complete Booking
+# npm run entity:complete Valet
+# npm run entity:complete Booking
+# npm run entity:complete Review
+# npm run entity:complete Verification
