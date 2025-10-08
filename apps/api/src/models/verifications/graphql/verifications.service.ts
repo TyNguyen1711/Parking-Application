@@ -17,7 +17,7 @@ export class VerificationsService {
   }
 
   findAll(args: FindManyVerificationArgs) {
-    // return this.prisma.verification.findMany(args);
+    return this.prisma.verification.findMany(args as any);
   }
 
   findOne(args: FindUniqueVerificationArgs) {

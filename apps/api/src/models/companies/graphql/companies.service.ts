@@ -7,14 +7,28 @@ import { UpdateCompanyInput } from './dtos/update-company.input';
 @Injectable()
 export class CompaniesService {
   constructor(private readonly prisma: PrismaService) {}
-  create(createCompanyInput: CreateCompanyInput) {
+  create({
+    description,
+    displayName,
+    managerId,
+    managerName,
+  }: CreateCompanyInput) {
     return this.prisma.company.create({
-      data: createCompanyInput,
+      data: {
+        description,
+        displayName,
+        Managers: {
+          create: {
+            displayName: managerName,
+            uid: managerId,
+          },
+        },
+      },
     });
   }
 
   findAll(args: FindManyCompanyArgs) {
-    // return this.prisma.company.findMany(args)
+    return this.prisma.company.findMany(args as any);
   }
 
   findOne(args: FindUniqueCompanyArgs) {

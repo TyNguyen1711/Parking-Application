@@ -14,7 +14,7 @@ export class ManagersService {
   }
 
   findAll(args: FindManyManagerArgs) {
-    // return this.prisma.manager.findMany(args)
+    return this.prisma.manager.findMany(args as any);
   }
 
   findOne(args: FindUniqueManagerArgs) {
@@ -22,11 +22,11 @@ export class ManagersService {
   }
 
   update(updateManagerInput: UpdateManagerInput) {
-    // const { id, ...data } = updateManagerInput;
-    // return this.prisma.manager.update({
-    //   where: { id },
-    //   data: data,
-    // });
+    const { uid, ...data } = updateManagerInput;
+    return this.prisma.manager.update({
+      where: { uid },
+      data: data,
+    });
   }
 
   remove(args: FindUniqueManagerArgs) {

@@ -8,6 +8,7 @@ import { checkRowLevelPermission } from 'src/common/auth/util';
 import type { GetUserType } from 'src/common/types';
 import { AllowAuthenticated, GetUser } from 'src/common/auth/auth.decorator';
 import { PrismaService } from 'src/common/prisma/prisma.service';
+import { BadGatewayException } from '@nestjs/common';
 
 @Resolver(() => Valet)
 export class ValetsResolver {
@@ -18,12 +19,19 @@ export class ValetsResolver {
 
   @AllowAuthenticated()
   @Mutation(() => Valet)
-  createValet(
+  async createValet(
     @Args('createValetInput') args: CreateValetInput,
     @GetUser() user: GetUserType,
   ) {
     // checkRowLevelPermission(user, args.uid)
-    return this.valetsService.create(args);
+    const company = await this.prisma.company.findFirst({
+      where: { Managers: { some: { uid: user.uid } } },
+    });
+
+    if (!company) {
+      throw new BadGatewayException('You do not have a company.');
+    }
+    return this.valetsService.create({ ...args, companyId: company.id });
   }
 
   @Query(() => [Valet], { name: 'valets' })

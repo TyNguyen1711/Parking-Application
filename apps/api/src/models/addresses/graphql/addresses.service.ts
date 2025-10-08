@@ -14,7 +14,7 @@ export class AddressesService {
   }
 
   findAll(args: FindManyAddressArgs) {
-    // return this.prisma.address.findMany(args)
+    return this.prisma.address.findMany(args as any);
   }
 
   findOne(args: FindUniqueAddressArgs) {

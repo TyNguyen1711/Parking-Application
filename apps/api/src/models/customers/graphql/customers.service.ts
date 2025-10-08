@@ -14,7 +14,7 @@ export class CustomersService {
   }
 
   findAll(args: FindManyCustomerArgs) {
-    // return this.prisma.customer.findMany(args);
+    return this.prisma.customer.findMany(args as any);
   }
 
   findOne(args: FindUniqueCustomerArgs) {

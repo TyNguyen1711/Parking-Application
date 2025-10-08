@@ -8,6 +8,7 @@ import { checkRowLevelPermission } from 'src/common/auth/util';
 import type { GetUserType } from 'src/common/types';
 import { AllowAuthenticated, GetUser } from 'src/common/auth/auth.decorator';
 import { PrismaService } from 'src/common/prisma/prisma.service';
+import { BadRequestException } from '@nestjs/common';
 
 @Resolver(() => Garage)
 export class GaragesResolver {
@@ -18,12 +19,25 @@ export class GaragesResolver {
 
   @AllowAuthenticated()
   @Mutation(() => Garage)
-  createGarage(
+  async createGarage(
     @Args('createGarageInput') args: CreateGarageInput,
     @GetUser() user: GetUserType,
   ) {
-    // checkRowLevelPermission(user, args.uid)
-    return this.garagesService.create(args);
+    const company = await this.prisma.company.findFirst({
+      where: {
+        Managers: {
+          some: {
+            uid: user.uid,
+          },
+        },
+      },
+    });
+    if (!company?.id) {
+      throw new BadRequestException(
+        'No company associated with the manager id.',
+      );
+    }
+    return this.garagesService.create({ ...args, companyId: company.id });
   }
 
   @Query(() => [Garage], { name: 'garages' })

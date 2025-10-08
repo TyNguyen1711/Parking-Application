@@ -14,7 +14,7 @@ export class ReviewsService {
   }
 
   findAll(args: FindManyReviewArgs) {
-    // return this.prisma.review.findMany(args)
+    return this.prisma.review.findMany(args as any);
   }
 
   findOne(args: FindUniqueReviewArgs) {

@@ -25,7 +25,8 @@ export class ValetAssignmentsResolver {
     @Args('createValetAssignmentInput') args: CreateValetAssignmentInput,
     @GetUser() user: GetUserType,
   ) {
-    // checkRowLevelPermission(user, args.uid)
+    checkRowLevelPermission(user, [args.pickupValetId, args.returnValetId]);
+    // return this.valetAssignmentsService.create(args);
     return this.valetAssignmentsService.create(args);
   }
 
@@ -45,10 +46,13 @@ export class ValetAssignmentsResolver {
     @Args('updateValetAssignmentInput') args: UpdateValetAssignmentInput,
     @GetUser() user: GetUserType,
   ) {
-    // const valetAssignment = await this.prisma.valetAssignment.findUnique({
-    //   where: { id: args.id },
-    // });
-    // checkRowLevelPermission(user, valetAssignment.uid)
+    const valetAssignment = await this.prisma.valetAssignment.findUnique({
+      where: { bookingId: args.bookingId },
+    });
+    checkRowLevelPermission(user, [
+      valetAssignment.pickupValetId,
+      valetAssignment.returnValetId,
+    ]);
     return this.valetAssignmentsService.update(args);
   }
 
@@ -59,7 +63,10 @@ export class ValetAssignmentsResolver {
     @GetUser() user: GetUserType,
   ) {
     const valetAssignment = await this.prisma.valetAssignment.findUnique(args);
-    // checkRowLevelPermission(user, valetAssignment.uid)
+    checkRowLevelPermission(user, [
+      valetAssignment.pickupValetId,
+      valetAssignment.returnValetId,
+    ]);
     return this.valetAssignmentsService.remove(args);
   }
 }

@@ -17,7 +17,7 @@ export class BookingTimelinesService {
   }
 
   findAll(args: FindManyBookingTimelineArgs) {
-    // return this.prisma.bookingTimeline.findMany(args)
+    return this.prisma.bookingTimeline.findMany(args as any);
   }
 
   findOne(args: FindUniqueBookingTimelineArgs) {

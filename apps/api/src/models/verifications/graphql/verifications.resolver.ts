@@ -19,13 +19,12 @@ export class VerificationsResolver {
     private readonly prisma: PrismaService,
   ) {}
 
-  @AllowAuthenticated()
+  @AllowAuthenticated('admin')
   @Mutation(() => Verification)
   createVerification(
     @Args('createVerificationInput') args: CreateVerificationInput,
     @GetUser() user: GetUserType,
   ) {
-    // checkRowLevelPermission(user, args.uid)
     return this.verificationsService.create(args);
   }
 
@@ -45,10 +44,6 @@ export class VerificationsResolver {
     @Args('updateVerificationInput') args: UpdateVerificationInput,
     @GetUser() user: GetUserType,
   ) {
-    // const verification = await this.prisma.verification.findUnique({
-    //   where: { id: args.id },
-    // });
-    // checkRowLevelPermission(user, verification.uid)
     return this.verificationsService.update(args);
   }
 
@@ -58,8 +53,6 @@ export class VerificationsResolver {
     @Args() args: FindUniqueVerificationArgs,
     @GetUser() user: GetUserType,
   ) {
-    const verification = await this.prisma.verification.findUnique(args);
-    // checkRowLevelPermission(user, verification.uid)
     return this.verificationsService.remove(args);
   }
 }

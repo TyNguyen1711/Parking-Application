@@ -19,8 +19,6 @@ export class CustomerWhereInputStrict
   implements
     RestrictProperties<CustomerWhereInputStrict, Prisma.CustomerWhereInput>
 {
-  // Todo: Add the below field decorator only to the $Enums types.
-  // @Field(() => $Enums.x)
   User: UserRelationFilter;
   uid: StringFilter;
   createdAt: DateTimeFilter;

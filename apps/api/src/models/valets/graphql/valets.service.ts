@@ -8,13 +8,13 @@ import { UpdateValetInput } from './dtos/update-valet.input';
 export class ValetsService {
   constructor(private readonly prisma: PrismaService) {}
   create(createValetInput: CreateValetInput) {
-    // return this.prisma.valet.create({
-    //   data: createValetInput,
-    // })
+    return this.prisma.valet.create({
+      data: createValetInput,
+    });
   }
 
   findAll(args: FindManyValetArgs) {
-    // return this.prisma.valet.findMany(args);
+    return this.prisma.valet.findMany(args as any);
   }
 
   findOne(args: FindUniqueValetArgs) {

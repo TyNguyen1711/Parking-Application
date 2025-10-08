@@ -15,6 +15,7 @@ import { UpdateUserInput } from './dtos/update-user.input';
 import * as bcrypt from 'bcryptjs';
 import { v4 as uuid } from 'uuid';
 import { JwtService } from '@nestjs/jwt';
+import { Prisma } from 'generated/prisma';
 @Injectable()
 export class UsersService {
   constructor(
@@ -103,8 +104,8 @@ export class UsersService {
     );
     return { token: jwtToken };
   }
-  findAll(args: FindManyUserArgs) {
-    return this.prisma.user.findMany(args);
+  async findAll(args: FindManyUserArgs) {
+    return this.prisma.user.findMany(args as any);
   }
 
   findOne(args: FindUniqueUserArgs) {

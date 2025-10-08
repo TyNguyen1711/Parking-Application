@@ -4,7 +4,7 @@ import { Booking } from './entity/booking.entity';
 import { FindManyBookingArgs, FindUniqueBookingArgs } from './dtos/find.args';
 import { CreateBookingInput } from './dtos/create-booking.input';
 import { UpdateBookingInput } from './dtos/update-booking.input';
-// import { checkRowLevelPermission } from 'src/common/auth/util';
+import { checkRowLevelPermission } from 'src/common/auth/util';
 import type { GetUserType } from 'src/common/types';
 import { AllowAuthenticated, GetUser } from 'src/common/auth/auth.decorator';
 import { PrismaService } from 'src/common/prisma/prisma.service';
@@ -22,7 +22,7 @@ export class BookingsResolver {
     @Args('createBookingInput') args: CreateBookingInput,
     @GetUser() user: GetUserType,
   ) {
-    // checkRowLevelPermission(user, args.uid);
+    checkRowLevelPermission(user, args.customerId);
     return this.bookingsService.create(args);
   }
 
@@ -45,7 +45,7 @@ export class BookingsResolver {
     const booking = await this.prisma.booking.findUnique({
       where: { id: args.id },
     });
-    // checkRowLevelPermission(user, booking.uid);
+    checkRowLevelPermission(user, booking?.customerId);
     return this.bookingsService.update(args);
   }
 
@@ -56,7 +56,7 @@ export class BookingsResolver {
     @GetUser() user: GetUserType,
   ) {
     const booking = await this.prisma.booking.findUnique(args);
-    // checkRowLevelPermission(user, booking.uid);
+    checkRowLevelPermission(user, booking?.customerId);
     return this.bookingsService.remove(args);
   }
 }

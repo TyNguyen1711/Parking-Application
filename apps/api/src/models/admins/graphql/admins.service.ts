@@ -14,7 +14,7 @@ export class AdminsService {
   }
 
   findAll(args: FindManyAdminArgs) {
-    // return this.prisma.admin.findMany(args);
+    return this.prisma.admin.findMany(args as any);
   }
 
   findOne(args: FindUniqueAdminArgs) {

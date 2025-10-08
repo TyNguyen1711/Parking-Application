@@ -14,7 +14,7 @@ export class SlotsService {
   }
 
   findAll(args: FindManySlotArgs) {
-    // return this.prisma.slot.findMany(args)
+    return this.prisma.slot.findMany(args as any);
   }
 
   findOne(args: FindUniqueSlotArgs) {

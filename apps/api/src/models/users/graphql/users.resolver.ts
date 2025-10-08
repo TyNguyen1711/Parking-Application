@@ -13,6 +13,7 @@ import { checkRowLevelPermission } from 'src/common/auth/util';
 import { type GetUserType } from 'src/common/types';
 import { AllowAuthenticated, GetUser } from 'src/common/auth/auth.decorator';
 import { PrismaService } from 'src/common/prisma/prisma.service';
+import { Prisma } from 'generated/prisma';
 
 @Resolver(() => User)
 export class UsersResolver {
